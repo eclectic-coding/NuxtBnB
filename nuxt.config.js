@@ -17,6 +17,9 @@ export default {
         content: 'my website description'
       }
     ]
+  },
+  router: {
+    prefetchLinks: false
   }
 }
 

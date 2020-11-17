@@ -8,6 +8,7 @@
     {{ home.location.address }} {{ home.location.state }} {{ home.location.country }}<br />
     <img src="/images/star.svg" alt="" width="20" height="20">
     {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds, {{ home.bathrooms }} bath
+    <div style="height: 800px; width: 800px" ref="map"></div>
 
   </div>
 </template>
@@ -18,13 +19,30 @@ import homes from '~/data/homes.json';
 export default {
   head() {
     return {
-      title: this.home.title
+      title: this.home.title,
+      script: [{
+        src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyCZEocD3-BFot0Hu8TwtXmSpCBVsy2fMik&Libraries=places',
+        hid: 'maps',
+        defer: true
+      }]
     };
   },
   data() {
     return {
       home: {}
     };
+  },
+  mounted() {
+    const mapOptions = {
+      zoom: 18,
+      center: new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng),
+      disableDefaultUI: true,
+      zoomControl: true
+    }
+    const map = new window.google.maps.Map(this.$refs.map, mapOptions);
+    const position = new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng)
+    const marker = new window.google.maps.Marker({ position })
+    marker.setMap(map)
   },
   created() {
     const home = homes.find((home) => home.objectID === this.$route.params.id);

@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "nuxt": "^2.14.7"
+  },
+  "devDependencies": {
+    "@nuxtjs/dotenv": "^1.4.1"
   }
 }

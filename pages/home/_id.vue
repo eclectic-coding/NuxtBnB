@@ -21,9 +21,13 @@ export default {
     return {
       title: this.home.title,
       script: [{
-        src: `https://maps.googleapis.com/maps/api/js?key=${process.env.API_KEY}&Libraries=places`,
+        src: `https://maps.googleapis.com/maps/api/js?key=${process.env.API_KEY}&libraries=places&callback=initMap`,
         hid: 'maps',
-        defer: true
+        defer: true,
+        skip: process.client && window.mapLoaded
+      }, {
+        innerHTML: "window.initMap = function(){ window.mapLoaded = true }",
+        hid: "init-map"
       }]
     };
   },
@@ -33,7 +37,6 @@ export default {
     };
   },
   mounted() {
-    console.log(process.env.API_KEY);
     const mapOptions = {
       zoom: 18,
       center: new window.google.maps.LatLng(this.home._geoloc.lat, this.home._geoloc.lng),

@@ -22,7 +22,10 @@ export default {
     prefetchLinks: false
   },
 
-  plugins: ['~/plugins/maps.client'],
+  plugins: [
+    '~/plugins/maps.client',
+    '~/plugins/dataApi'
+  ],
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: ['@nuxtjs/dotenv'],

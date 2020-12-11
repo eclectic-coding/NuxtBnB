@@ -9,7 +9,7 @@
     "start": "nuxt start"
   },
   "dependencies": {
-    "nuxt": "^2.14.7"
+    "nuxt": "^2.14.11"
   },
   "devDependencies": {
     "@nuxtjs/dotenv": "^1.4.1"
